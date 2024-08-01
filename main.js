@@ -1,24 +1,43 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import { Application, Assets, Graphics, Sprite } from "pixi.js";
+import { startGame, updateBackgroundColor } from "./functions";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+(async () => {
+  const app = new Application();
 
-setupCounter(document.querySelector('#counter'))
+  await app.init({ background: "#1099bb", resizeTo: window });
+
+  let isGameStarted = false;
+
+  document.body.appendChild(app.canvas);
+
+  const texture = await Assets.load("https://pixijs.com/assets/bunny.png");
+  let obj = new Graphics().rect(0, 0, 20, 20).fill(0xff0000);
+
+  const startButton = document.getElementById("start-button");
+  const input = document.getElementById("num-input");
+  // app.stage.addChild(startButton);
+
+  // startButton.x = app.screen.width / 2;
+  // startButton.y = app.screen.height / 2;
+
+  const bunny = new Sprite(texture);
+
+  app.stage.addChild(bunny);
+
+  // app.stage.addChild(obj);
+
+  // bunny.anchor.set(0.5);
+
+  // bunny.x = app.screen.width / 2;
+  // bunny.y = app.screen.height / 2;
+
+  // document.addEventListener("keydown", (event) => {
+  //   if (event.key === "ArrowDown") {
+  //     obj.y = obj.y + 1;
+  //   }
+  // });
+
+  startButton.addEventListener("click", () => {
+    startGame(isGameStarted, startButton, app, input);
+  });
+})();

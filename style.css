@@ -28,6 +28,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  position: relative;
 }
 
 h1 {
@@ -93,4 +94,18 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+#start-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* background-color: red; */
+}
+
+#num-input {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
